@@ -1,0 +1,315 @@
+GET _search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+GET imilite-data-framemetadata-latest/_search?size=1000
+{
+  "query": {
+    "match_phrase": {
+      "id": "DS_PHR1A_201907130701391_FR1_PX_E056N27_0506_00675"
+    }
+  }
+
+}
+GET imilite-data-framemetadata-all/_search?size=1000
+{
+  "query": {
+    "match_all": {}
+  }
+
+}
+//
+POST imilite-data-framemetadata-all/_delete_by_query
+{
+  "query": {
+    "match_phrase": {
+      "overlayId": "Pleiades_PAN_MSI_DS_PHR1A_201907130701391_FR1_PX_E056N27_0506_00675_793d3af4-81c1-44f8-9129-fcc67c17ae2e"
+    }
+  }
+
+}
+}
+
+//4337555101 - DS_PHR1A_201907130701391_FR1_PX_E056N27_0506_00675 - OK
+//4337555801 - DS_PHR1B_201606280827440_FR1_PX_E036N33_0618_00490 - OK
+
+//4337559101 - DS_PHR1A_201603030826571_FR1_PX_E036N33_0619_00503 - OK
+//4350435101 - DS_PHR1A_201705240701233_FR1_PX_E056N27_0508_00676 - OK
+
+//4350433101 - DS_PHR1A_201608110701136_FR1_PX_E056N27_0507_00680 - OK
+//TPP1601224855 - DS_PHR1A_201907150823553_FR1_PX_E036N33_0409_00548 - OK
+
+
+GET _cat/indices
+
+GET imilite-data-rule-all/_search
+{
+  "query": {
+    "match_phrase": {
+      "": "PHRASE"
+    }
+  }
+}
+
+POST imilite-data-overlaymetadata-all/_search?size=1000
+{
+  "query": {
+    "match_phrase": {
+      "id": "Pleiades_PAN_MSI_DS_PHR1A_201907130701391_FR1_PX_E056N27_0506_00675_a0e6b8e3-f060-4ccd-b482-86deaeee545d"
+    }
+  }
+}
+
+GET imilite-data-rule-all/_search
+
+
+POST imilite-data-overlaymetadata-all/_delete_by_query
+{
+  "query": {
+    "match_phrase": {
+      "id": "Pleiades_PAN_MSI_DS_PHR1A_201907130701391_FR1_PX_E056N27_0506_00675_abd7ec14-9746-4ce0-b9d2-bfd17639e2b7"
+    }
+  }
+}
+POST imilite-data-overlaymetadata-all/_search
+{
+  "query": {
+    "terms": {
+      "sensorName": [
+                    "Pleiades"
+
+
+
+      ]
+    }
+  }
+}
+
+
+POST imilite-data-framemetadata-all/_search
+{
+  "query": {
+    "terms": {
+      "id": ["DS_PHR1A_201907130701391_FR1_PX_E056N27_0506_00675",
+            "DS_PHR1B_201606280827440_FR1_PX_E036N33_0618_00490",
+            "DS_PHR1A_201603030826571_FR1_PX_E036N33_0619_00503",
+            "DS_PHR1A_201705240701233_FR1_PX_E056N27_0508_00676",
+            "DS_PHR1A_201608110701136_FR1_PX_E056N27_0507_00680",
+            "DS_PHR1A_201907150823553_FR1_PX_E036N33_0409_00548"
+
+      ]
+
+    }
+  }
+
+}
+}
+
+POST imilite-data-framemetadata-all/_delete_by_query
+{
+  "query": {
+    "terms": {
+      "id": ["DS_PHR1A_201907130701391_FR1_PX_E056N27_0506_00675",
+            "DS_PHR1B_201606280827440_FR1_PX_E036N33_0618_00490",
+            "DS_PHR1A_201603030826571_FR1_PX_E036N33_0619_00503",
+            "DS_PHR1A_201705240701233_FR1_PX_E056N27_0508_00676",
+            "DS_PHR1A_201608110701136_FR1_PX_E056N27_0507_00680",
+            "DS_PHR1A_201907150823553_FR1_PX_E036N33_0409_00548"
+
+      ]
+
+    }
+  }
+
+}
+}
+
+
+POST imilite-data-overlaymetadata-all/_delete_by_query
+{
+  "query": {
+    "terms": {
+      "sensorName": [
+                    "Pleiades"
+
+
+
+      ]
+    }
+  }
+}
+
+
+
+
+
+GET rule-frame/_search
+
+GET imilite-data-rule-all/_search
+
+
+
+
+POST imilite-data-framemetadata-all/_search
+{
+  "query": {
+    "terms": {
+      "id": [
+            "DS_PHR1A_201608110701136_FR1_PX_E056N27_0507_00680"
+
+      ]
+
+    }
+  }
+
+}
+}
+
+
+POST imilite-data-framemetadata-all/_update_by_query?refresh=true
+{
+  "script": {
+    "source": "ctx._source.overlayId=params.overlayId",
+    "lang": "painless",
+    "params": {
+      "overlayId": [
+        "Pleiades_PAN_MSI_DS_PHR1A_201907130701391_FR1_PX_E056N27_0506_00675_21fab952-731c-4377-b158-6e78c81010c8"
+      ]
+    }
+
+  },
+   "query": {
+    "term": {
+      "id": "DS_PHR1A_201907130701391_FR1_PX_E056N27_0506_00675"
+    }
+
+
+  }
+
+}
+
+
+PUT /test/_doc/1?refresh
+{"test": "test"}
+PUT /test/_doc/2?refresh=true
+{"test": "test"}
+
+PUT /test/_doc/3
+{"test": "test"}
+PUT /test/_doc/4?refresh=false
+{"test": "test"}
+
+PUT /test/_doc/4?refresh=wait_for
+{"test4": "test4"}
+
+POST /test/_update_by_query?refresh=wait_for
+{
+  "script": {
+    "source": "ctx._source.test1=2",
+    "lang": "painless"
+  },
+  "query": {
+    "match": {
+      "test": "test1"
+    }
+  }
+}
+
+
+
+GET /test/_search
+
+
+
+
+GET imilite-data-framemetadata-all/_search
+{
+  "sort": [
+    {
+      "imagingTime": {
+        "order": "desc"
+      }
+    }
+  ],
+  "query": {
+
+    "bool": {
+
+      "must": [
+
+
+
+        {"range": {
+          "imagingTime": {
+            "lte": "2019-07-13T07:02:16.000Z"
+          }
+        }},
+
+
+
+        {
+          "match": {
+            "sensorName": "Pleiades"
+          }
+        },
+
+
+
+
+        {
+          "regexp": {
+            "overlayId": "@&~(1Pleiades_PAN_MSI_DS_PHR1A_201907130701391_FR1_PX_E056N27_0506_00675_ecde199d-847e-4312-9f3f-623519e79a69)"
+          }
+        },
+
+
+
+        {
+          "geo_shape": {
+            "footprint": {
+              "relation": "intersects",
+              "shape": {
+                "type": "Polygon",
+                "coordinates": [
+              [
+                [
+                  56.36080171887789,
+                  27.26033785478304
+                ],
+                [
+                  56.41450847775511,
+                  27.26057281534595
+                ],
+                [
+                  56.41485848674547,
+                  27.19363145281156
+                ],
+                [
+                  56.3611838288672,
+                  27.19339716306795
+                ],
+                [
+                  56.36080171887789,
+                  27.26033785478304
+                ]
+              ]
+            ]
+              }
+            }
+
+          }
+        }
+
+      ]
+    }
+  }
+}
+}
+
+
+
+
+
+

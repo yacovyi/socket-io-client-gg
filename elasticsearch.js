@@ -43,8 +43,8 @@ module.exports = class Elasticsearch {
                 id: frameId,
                 body: {
                     doc: fieldsToUpdate
-                }
-                , refresh: "wait_for"
+                },
+                refresh: "wait_for"
             };
 
             let {body: res} = await this.client.update(req);
@@ -58,4 +58,73 @@ module.exports = class Elasticsearch {
             throw (err);
         }
     }
+
+    // ############################
+    // createFramesRequest
+
+    async getMatchFrame(frame, roi)
+    {
+        try {
+            const data2send = this.createFramesRequest(frame, roi);
+            return data2send;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    createFramesRequest(frame, roi)
+    {
+        let genericQuery = {
+            "conditions": [
+                [
+                    {
+                        "matchQueries": [
+                            {
+                                "field": "sensorName",
+                                "value": frame.sensorName
+                            }
+                        ],
+                        "rangeQueries": [
+                            {
+                                "field": "imagingTime",
+                                "to": frame.imagingTime
+                            }
+                        ],
+                        "regexpQueries": [
+                            {
+                                "field": "overlayId",
+                                "value": `@&~(${frame.overlayId})`
+                            }
+                        ],
+                        "geoQueries": [
+                            {
+                                "field": "footprint",
+                                "relation": "intersects",
+                                "polygon": {
+                                    "type": "Polygon",
+                                    "coordinates": roi? roi.coordinates[0]:frame.footprint.coordinates
+                                }
+                            }
+                        ]
+                    }
+
+                ]
+
+            ]
+        };
+
+        genericQuery.sortByInfo = [{
+            "field": "imagingTime",
+            "order": "desc"
+        }
+        ]
+        genericQuery.paginationInfo = {
+            "size": 2147483647,
+            "from": 0
+        };
+
+        return genericQuery;
+
+    }
+    // ############################
 }
