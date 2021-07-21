@@ -4,8 +4,8 @@ const ApiInvodker = require('./apiInvoke');
 
 const socketioManager = 'http://localhost:3017';
 const socketio = 'http://localhost:3018';
-//const detectionsChannel = 'detectionsChannel'
-const detectionsChannel = 'workspaceItemAddedChannel'
+const detectionsChannel = 'detectionsChannel'
+//const detectionsChannel = 'workspaceItemAddedChannel'
 const channels = detectionsChannel;
 
 

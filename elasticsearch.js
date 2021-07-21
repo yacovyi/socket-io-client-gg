@@ -6,6 +6,32 @@ module.exports = class Elasticsearch {
         this.client = new Client({node: host});
         this._frameIndex = frameIndex;
     }
+    async searchFramesByOverlayId(id) {
+        try {
+            let {body: res} = await this.client.search({
+                index: `${this._frameIndex}-all`,
+                size: 5000,
+                body: {
+                    query: {
+                        term: {
+                            overlayId: id
+                        }
+                    }
+                }
+            });
+            if (res.hits.hits.length === 0) {
+                return [];
+            } else {
+                return this.parseElasticResults(res);
+            }
+        } catch (err) {
+            this._logger.log('error', `Error in searchFramesByOverlayId ${id} because ${JSON.stringify(err)}`);
+            throw err;
+        }
+    }
+    parseElasticResults(res) {
+        return _.map(res.hits.hits, hit => hit._source)
+    }
     async updateFrameByQuery(frameId, overlayId) {
         try {
             let {body: res} = await this.client.updateByQuery({
